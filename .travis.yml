@@ -8,6 +8,7 @@ branches:
   only:
     - develop
     - "/^feature\\/.*$/"
+    - "/^bugfix\\/.*$/"
 jobs:
   include:
     - stage: 'Validation'
