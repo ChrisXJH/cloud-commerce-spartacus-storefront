@@ -7,13 +7,14 @@ import { StoreFinderService } from './store-finder.service';
 import { WindowRef } from './window-ref';
 import { LongitudeLatitude } from '../models/longitude-latitude';
 
-describe('StoreFinderService', () => {
+fdescribe('StoreFinderService', () => {
   let service: StoreFinderService;
   let store: Store<fromStore.StoresState>;
 
   const queryText = 'test';
   const countryIsoCode = 'CA';
   const regionIsoCode = 'CA-QC';
+  const geolocationWatchId = 1;
 
   const longitudeLatitude: LongitudeLatitude = {
     longitude: 10.1,
@@ -24,11 +25,11 @@ describe('StoreFinderService', () => {
     nativeWindow: {
       navigator: {
         geolocation: {
-          getCurrentPosition: callback => {
-            callback({
-              coords: longitudeLatitude
-            });
-          }
+          watchPosition: callback => {
+            callback({ coords: longitudeLatitude });
+            return geolocationWatchId;
+          },
+          clearWatch: () => {}
         }
       }
     }
